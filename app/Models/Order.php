@@ -12,15 +12,18 @@ class Order extends Model
     use HasFactory;
     protected $table = "orders";
     protected $fillable=[
-        "user_number",
-        "plate_number",
+        "user_id",
+        "painting_id",
+        "price",
+        "payment",
         "date",
+        "sent",
     ];
 
     public function user(){
         return $this->belongsTo(User::class);
     }
-    
+
     public function paintings(){
         return $this->hasMany(Painting::class);
     }

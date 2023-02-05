@@ -21,22 +21,7 @@ use App\Http\Controllers\PaintingController;
 
 // Route::prefix('/user')->group(function()
 // {
-//     Route::post('/login', 'LoginController@login');
-//     Route::post('/login2', [App\Http\Controllers\LoginController::class, 'login']);
-// });
-
-// Route::group([
-//     'prefix' => 'auth'
-// ], function () {
-//     Route::post('login', 'LoginController@login');
-//     Route::post('signup', 'LoginController@signup');
-
-//     Route::group([
-//     'middleware' => 'auth:api'
-//     ], function() {
-//         Route::get('logout', 'LoginController@logout');
-//         Route::get('user', 'LoginController@user');
-//     });
+//     Route::post('/login', [App\Http\Controllers\LoginController::class, 'login']);
 // });
 
 Route::group([
@@ -53,8 +38,6 @@ Route::group([
     });
 });
 
-Auth::routes();
-
 Route::get('/Paintings/location/{location}', [App\Http\Controllers\PaintingController::class, 'show1']);
 Route::post('/Paintings/available/{location}', [App\Http\Controllers\PaintingController::class, 'available']);
 Route::get('/Paintings/like/{location}/{searcha}', [App\Http\Controllers\PaintingController::class, 'LocationLike']);
@@ -65,6 +48,9 @@ Route::get('/Orders/{id}', [App\Http\Controllers\OrderController::class, 'show']
 
 Route::post('/applogin', [App\Http\Controllers\HomeController::class, 'applogin'])->name('applogin');
 
-Route::get('/Users', [App\Http\Controllers\UserContrdfoller::class, 'index'])->middleware('auth');
+Route::get('/Users', [App\Http\Controllers\UserController::class, 'index'])->middleware('auth');
 Route::get('/Users/edit/{id}', [App\Http\Controllers\UserController::class, 'edit'])->middleware('auth');
 Route::post('/Users/update/{id}', [App\Http\Controllers\UserController::class, 'update'])->middleware('auth');
+
+Route::get('/Previews/{id}', [App\Http\Controllers\PreviewController::class, 'index']);
+Route::post('/Previews/store', [App\Http\Controllers\PreviewController::class, 'store']);
